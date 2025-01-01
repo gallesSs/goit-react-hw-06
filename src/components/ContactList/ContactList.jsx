@@ -1,25 +1,30 @@
 import Contact from "../Contact/Contact";
 import css from "./ContactList.module.css";
+import {useDispatch, useSelector} from 'react-redux';
+import {deleteContact, selectContacts} from '../../redux/contactsSlice.js';
+import {selectFilter} from '../../redux/filtersSlice.js';
 
-const ContactList = ({
-  users,
-  onDeleteProfile,
-}) => {
+const ContactList = () => {
+  const dispatch = useDispatch();
+  const users = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
+  const filteredData = users.filter(item => item.name.toLowerCase().includes(filter.toLowerCase()));
+
   return (
     <div>
       <ul className={css.list}>
-        {users.map((user) => {
+        {filteredData.map((user) => {
           return (
             <li
               className={css.listItem}
               key={user.id}
             >
-              <Contact person={user} />
+              <Contact {...user} />
               <button
                 className={css.btn}
                 type="button"
                 onClick={() =>
-                  onDeleteProfile(user.id)
+                  dispatch(deleteContact(user.id))
                 }
               >
                 Delete
