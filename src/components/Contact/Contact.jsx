@@ -2,8 +2,7 @@ import css from "./Contact.module.css";
 import { IoMdContact } from "react-icons/io";
 import { FaPhone } from "react-icons/fa6";
 
-const Contact = ({name, number
-}) => {
+const Contact = ({number, name}) => {
   return (
     <>
       <div>

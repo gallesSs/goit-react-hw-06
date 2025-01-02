@@ -2,8 +2,7 @@ import css from "./SearchBox.module.css";
 import {useDispatch} from 'react-redux';
 import {changeFilter} from '../../redux/filtersSlice.js';
 
-const SearchBox = (
-) => {
+const SearchBox = () => {
   const dispatch = useDispatch();
   return (
     <>

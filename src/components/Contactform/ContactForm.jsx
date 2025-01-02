@@ -8,26 +8,26 @@ import {nanoid} from 'nanoid';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const INITIAL_VALUES = {
-    profileName: "",
-    profileNumber: "",
-  };
+  const initialValues = {
+    name: '',
+    number: ''
+  }
 
-  const handleSubmit = (values, actions) => {
+  const onSubmit = (values) => {
     const profileObject = {
-      name: values.profileName,
-      number: values.profileNumber,
+      name: values.name,
+      number: values.number,
       id: nanoid()
     };
     dispatch(addContact(profileObject))
   };
 
   const FeedbackSchema = Yup.object().shape({
-    profileName: Yup.string()
+    name: Yup.string()
       .min(3, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
-    profileNumber: Yup.string()
+    number: Yup.string()
       .min(3, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
@@ -38,8 +38,8 @@ const ContactForm = () => {
   return (
     <>
       <Formik
-        initialValues={INITIAL_VALUES}
-        onSubmit={handleSubmit}
+        initialValues={initialValues}
+        onSubmit={onSubmit}
         validationSchema={FeedbackSchema}
       >
         <Form className={css.container}>
@@ -48,12 +48,12 @@ const ContactForm = () => {
             <Field
               className={css.input}
               type="text"
-              name="profileName"
+              name="name"
               required
             />
             <ErrorMessage
               className={css.ErrorMessage}
-              name="profileName"
+              name="name"
               component="span"
             />
           </label>
@@ -62,12 +62,12 @@ const ContactForm = () => {
             <Field
               className={css.input}
               type="text"
-              name="profileNumber"
+              name="number"
               required
             />
             <ErrorMessage
               className={css.ErrorMessage}
-              name="profileNumber"
+              name="number"
               component="span"
             />
           </label>
